@@ -35,7 +35,7 @@ jobs:
         python3 --version
         pip3 install --upgrade pip
         pip3 install -r requirements.txt
-        pip3 install pyinstaller
+        brew install ccache
         chmod +x ./build_macos.sh
         ./build_macos.sh
 
