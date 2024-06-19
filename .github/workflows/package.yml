@@ -41,8 +41,7 @@ jobs:
 
     - name: Log files
       run: |
-        ls dist
-        ls dist/SalveTest
+        rm -rf SalveTest
         mkdir SalveTest
 
     - name: Package app
