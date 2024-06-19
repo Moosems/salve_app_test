@@ -1,4 +1,5 @@
 from tkinter import Tk
+
 from salve_ipc import IPC
 
 
@@ -10,6 +11,7 @@ class App(Tk):
     def destroy(self) -> None:
         super().destroy()
         self.context.kill_IPC()
+
 
 if __name__ == "__main__":
     app = App()
