@@ -1,0 +1,70 @@
+name: Build and package the Mac version
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-app:
+    name: Build for Mac
+    runs-on: macos-13
+    env:
+      PYTHONVERSION: "3.11.0"
+      MACOSX_DEPLOYMENT_TARGET: "13.0"
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache Python download
+      id: cache-python-download
+      uses: actions/cache@v3
+      with:
+        path: ~/python.pkg
+        key: macOS-Python-${{ env.PYTHON_VERSION }}
+
+    - name: Get Python
+      run: |
+       # curl https://www.python.org/ftp/python/${PYTHONVERSION}/python-${PYTHONVERSION}-macos11.pkg -o ~/python.pkg
+       curl https://www.python.org/ftp/python/${PYTHONVERSION}/python-${PYTHONVERSION}-macos13.pkg -o ~/python.pkg
+
+    - name: Install Python
+      run: sudo installer -pkg ~/python.pkg -target /
+
+    - name: Install Python dependencies and build
+      run: |
+        python3 --version
+        pip3 install --upgrade pip
+        pip3 install -r requirements.txt
+        pip3 install pyinstaller
+        chmod +x ./build_macos.sh
+        ./build_macos.sh
+
+    - name: Log files
+      run: |
+        ls dist
+        ls dist/SalveTest
+        mkdir SalveTest
+
+    - name: Package app
+      run: |
+        mv ./dist/SalveTest.app ./SalveTest/SalveTest.app
+        brew install create-dmg
+        test -f SalveTest.dmg && rm SalveTest.dmg
+        create-dmg \
+          --volname "SalveTest" \
+          --volicon "SalveTest_module/static/SalveTest.icns" \
+          --icon "SalveTest.app" 100 100 \
+          --app-drop-link 400 100 \
+          --window-size 500 300 \
+          "SalveTest.dmg" \
+          "SalveTest/"
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.TOKEN }}
+        file: SalveTest.dmg
+        asset_name: SalveTest.dmg
+        tag: latest-mac-build
+        overwrite: true

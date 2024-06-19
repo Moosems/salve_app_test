@@ -1,0 +1,17 @@
+# Mac stuff
+.DS_Store
+
+# Python
+__pycache__/
+dist/
+build/
+.ruff_cache/
+salve_ipc.egg-info/
+
+# Nuitka stuff
+main.build
+main.dist
+main.onefile-build
+SalveTest.app
+SalveTest
+_CodeSignature
