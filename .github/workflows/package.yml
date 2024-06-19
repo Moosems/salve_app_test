@@ -46,12 +46,12 @@ jobs:
 
     - name: Package app
       run: |
-        mv ./dist/SalveTest.app ./SalveTest/SalveTest.app
+        mv ./SalveTest.app ./SalveTest/SalveTest.app
         brew install create-dmg
         test -f SalveTest.dmg && rm SalveTest.dmg
         create-dmg \
           --volname "SalveTest" \
-          --volicon "SalveTest_module/static/SalveTest.icns" \
+          --volicon "icon.png" \
           --icon "SalveTest.app" 100 100 \
           --app-drop-link 400 100 \
           --window-size 500 300 \
