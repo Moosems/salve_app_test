@@ -9,9 +9,4 @@ build/
 salve_ipc.egg-info/
 
 # Nuitka stuff
-main.build
-main.dist
-main.onefile-build
 SalveTest.app
-SalveTest
-_CodeSignature
