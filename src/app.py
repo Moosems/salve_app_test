@@ -3,9 +3,13 @@ from tkinter.ttk import Button, OptionMenu, Style
 
 from salve_ipc import COMMANDS, IPC
 
+from src.definition_page import DefinitionPage
+from src.editorconfig_page import EditorconfigPage
+
 from .autocomplete_page import AutocompletePage
 from .misc import resize_app
 from .replacements_page import ReplacementsPage
+from .highlight_page import HighlightPage
 
 
 class App(Tk):
@@ -38,11 +42,11 @@ class App(Tk):
             case "replacements":
                 ReplacementsPage(self.context)
             case "highlight":
-                ...
+                HighlightPage(self.context)
             case "editorconfig":
-                ...
+                EditorconfigPage(self.context)
             case "definition":
-                ...
+                DefinitionPage(self.context)
 
     def destroy(self) -> None:
         super().destroy()
