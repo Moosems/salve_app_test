@@ -1,5 +1,5 @@
 from tkinter import Toplevel
-from tkinter.ttk import Button, Entry, Frame, Label
+from tkinter.ttk import Button, Entry, Label
 
 from salve_ipc import AUTOCOMPLETE, IPC, is_unicode_letter
 
@@ -13,13 +13,13 @@ class AutocompletePage(Toplevel):
         self.withdraw()
         self.main_entry = Entry(self)
         self.main_entry.insert(0, "from code import function; func")
-        self.main_entry.grid(row=0, column=0, rowspan=1, sticky="nsew")
+        self.main_entry.grid(row=0, column=0, sticky="nsew")
         self.output_label = Label(self)
-        self.output_label.grid(row=1, column=0, rowspan=1, sticky="nsew")
+        self.output_label.grid(row=1, column=0, sticky="nsew")
         self.run_button = Button(
             self, text="Get autocompletions", command=self.run
         )
-        self.run_button.grid(row=2, column=0, rowspan=1, sticky="nsew")
+        self.run_button.grid(row=2, column=0, sticky="nsew")
         resize_app(self)
         self.after_idle(self.loop)
         self.deiconify()

@@ -7,9 +7,9 @@ from src.definition_page import DefinitionPage
 from src.editorconfig_page import EditorconfigPage
 
 from .autocomplete_page import AutocompletePage
+from .highlight_page import HighlightPage
 from .misc import resize_app
 from .replacements_page import ReplacementsPage
-from .highlight_page import HighlightPage
 
 
 class App(Tk):
@@ -24,13 +24,11 @@ class App(Tk):
         self.choice_menu = OptionMenu(
             self, self.ipc_option, COMMANDS[0], *COMMANDS
         )
-        self.choice_menu.grid(row=0, column=0, rowspan=1, sticky="nsew")
+        self.choice_menu.grid(row=0, column=0, sticky="nsew")
         self.open_ipc_page_button = Button(
             self, text="Open IPC action page", command=self.make_ipc_page
         )
-        self.open_ipc_page_button.grid(
-            row=1, column=0, rowspan=1, sticky="nsew"
-        )
+        self.open_ipc_page_button.grid(row=1, column=0, sticky="nsew")
         resize_app(self)
         self.deiconify()
 

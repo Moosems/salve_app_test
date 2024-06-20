@@ -1,10 +1,9 @@
-from tkinter import Toplevel, Text
-from tkinter.ttk import Button, Entry, Frame, Label
-from salve_ipc import DEFINITION, IPC, is_unicode_letter
+from tkinter import Text, Toplevel
+from tkinter.ttk import Button, Entry, Label
+
+from salve_ipc import DEFINITION, IPC
 
 from .misc import resize_app
-
-# TODO: Write this
 
 
 class DefinitionPage(Toplevel):

@@ -1,7 +1,7 @@
 from tkinter import Toplevel
-from tkinter.ttk import Button, Entry, Frame, Label
+from tkinter.ttk import Button, Entry, Label
 
-from salve_ipc import IPC, REPLACEMENTS, is_unicode_letter
+from salve_ipc import IPC, REPLACEMENTS
 
 from .misc import resize_app
 
@@ -15,18 +15,16 @@ class ReplacementsPage(Toplevel):
         self.main_entry.insert(
             0, "from code import function, replacement_word"
         )
-        self.main_entry.grid(row=0, column=0, rowspan=1, sticky="nsew")
+        self.main_entry.grid(row=0, column=0, sticky="nsew")
         self.replacement_word_entry = Entry(self)
         self.replacement_word_entry.insert(0, "replacement_worb")
-        self.replacement_word_entry.grid(
-            row=1, column=0, rowspan=1, sticky="nsew"
-        )
+        self.replacement_word_entry.grid(row=1, column=0, sticky="nsew")
         self.output_label = Label(self)
-        self.output_label.grid(row=2, column=0, rowspan=1, sticky="nsew")
+        self.output_label.grid(row=2, column=0, sticky="nsew")
         self.run_button = Button(
             self, text="Get replacements", command=self.run
         )
-        self.run_button.grid(row=3, column=0, rowspan=1, sticky="nsew")
+        self.run_button.grid(row=3, column=0, sticky="nsew")
         resize_app(self)
         self.after_idle(self.loop)
         self.deiconify()

@@ -1,7 +1,7 @@
-from tkinter import Toplevel, Text
-from tkinter.ttk import Button, Entry, Frame, Label
+from tkinter import Text, Toplevel
+from tkinter.ttk import Button
 
-from salve_ipc import HIGHLIGHT, IPC, is_unicode_letter
+from salve_ipc import HIGHLIGHT, IPC
 
 from .misc import resize_app
 
