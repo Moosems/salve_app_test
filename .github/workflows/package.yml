@@ -51,7 +51,6 @@ jobs:
         test -f SalveTest.dmg && rm SalveTest.dmg
         create-dmg \
           --volname "SalveTest" \
-          --volicon "icon.png" \
           --icon "SalveTest.app" 100 100 \
           --app-drop-link 400 100 \
           --window-size 500 300 \
