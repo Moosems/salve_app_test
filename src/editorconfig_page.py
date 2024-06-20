@@ -12,13 +12,13 @@ class EditorconfigPage(Toplevel):
         self.context = context
         self.withdraw()
         self.main_entry = Entry(self)
-        self.main_entry.insert(
-            0, "/path/to/file"
-        )
+        self.main_entry.insert(0, "/path/to/file")
         self.main_entry.grid(row=0, column=0, rowspan=1, sticky="nsew")
         self.output_label = Label(self)
         self.output_label.grid(row=2, column=0, rowspan=1, sticky="nsew")
-        self.run_button = Button(self, text="Get editorconfig info", command=self.run)
+        self.run_button = Button(
+            self, text="Get editorconfig info", command=self.run
+        )
         self.run_button.grid(row=3, column=0, rowspan=1, sticky="nsew")
         resize_app(self)
         self.after_idle(self.loop)
@@ -33,6 +33,5 @@ class EditorconfigPage(Toplevel):
 
     def run(self) -> None:
         self.context.request(
-            command=EDITORCONFIG,
-            file_path=self.main_entry.get()
+            command=EDITORCONFIG, file_path=self.main_entry.get()
         )

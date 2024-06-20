@@ -26,9 +26,8 @@ class HighlightPage(Toplevel):
             tp = Toplevel(self)
             txt = Text(tp)
             txt.pack()
-            for token in output["result"]: # type: ignore
+            for token in output["result"]:  # type: ignore
                 txt.insert("end", (str(token) + "\n"))
-
 
         self.after(50, self.loop)
 

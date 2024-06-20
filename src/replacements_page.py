@@ -23,7 +23,9 @@ class ReplacementsPage(Toplevel):
         )
         self.output_label = Label(self)
         self.output_label.grid(row=2, column=0, rowspan=1, sticky="nsew")
-        self.run_button = Button(self, text="Get replacements", command=self.run)
+        self.run_button = Button(
+            self, text="Get replacements", command=self.run
+        )
         self.run_button.grid(row=3, column=0, rowspan=1, sticky="nsew")
         resize_app(self)
         self.after_idle(self.loop)
