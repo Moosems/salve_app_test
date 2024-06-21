@@ -48,18 +48,21 @@ def download_newest_version() -> None:
         return
 
     zip_path = NamedTemporaryFile(prefix="SalveTest.app.zip")
-    app_dir = TemporaryDirectory(prefix="SalveTest.app")
+    app_dir = TemporaryDirectory(prefix="SalveTest")
+    old_app_dir = TemporaryDirectory(prefix="OldSalveTest")
     urlretrieve(assets[0]["browser_download_url"], zip_path.name)
     with ZipFile(zip_path.name) as zip_ref:
         zip_ref.extractall(app_dir.name)
+    move(folder, old_app_dir.name)
     move(app_dir.name + "/SalveTest.app", "/Applications/SalveTest.app")
-    move(folder, app_dir.name)
     app_dir.cleanup()
     zip_path.close()
-    Popen(["chmod", "+x" "/Applications/SalveTest.app"]).wait()
+    old_app_dir.cleanup()
+    Popen(["chmod", "+x", "/Applications/SalveTest.app/Contents/MacOS/SalveTest"]).wait()
     Popen(["open", "/Applications/SalveTest.app"])
     exit(1)
 
 
 if not is_newest_version() and is_frozen:
+    print("Trying", VERSION)
     download_newest_version()
