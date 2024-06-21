@@ -52,10 +52,11 @@ def download_newest_version() -> None:
     urlretrieve(assets[0]["browser_download_url"], zip_path.name)
     with ZipFile(zip_path.name) as zip_ref:
         zip_ref.extractall(app_dir.name)
-    move(app_dir.name, "/Applications/SalveTest.app")
+    move(app_dir.name + "/SalveTest.app", "/Applications/SalveTest.app")
     move(folder, app_dir.name)
     app_dir.cleanup()
     zip_path.close()
+    Popen(["chmod", "+x" "/Applications/SalveTest.app"]).wait()
     Popen(["open", "/Applications/SalveTest.app"])
     exit(1)
 
