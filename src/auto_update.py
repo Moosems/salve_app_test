@@ -1,9 +1,10 @@
-from .misc import GITHUB_URL, VERSION
-from pathlib import Path
-from requests import Response, get
-from requests.exceptions import ReadTimeout
 import urllib.request
 from tempfile import TemporaryDirectory
+
+from requests import Response, get
+from requests.exceptions import ReadTimeout
+
+from .misc import GITHUB_URL, VERSION
 
 
 # NOTE: This should always be run in a subprocess!

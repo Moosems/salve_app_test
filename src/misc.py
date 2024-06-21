@@ -1,6 +1,8 @@
 from pathlib import Path
 
-GITHUB_URL = "https://api.github.com/repos/Moosems/salve_app_test/releases/latest"
+GITHUB_URL = (
+    "https://api.github.com/repos/Moosems/salve_app_test/releases/latest"
+)
 
 VERSION = "0.1.1"
 try:

@@ -6,11 +6,11 @@ from salve_ipc import COMMANDS, IPC
 from src.definition_page import DefinitionPage
 from src.editorconfig_page import EditorconfigPage
 
+from .auto_update import download_newest_version  # type: ignore # noqa: F401
 from .autocomplete_page import AutocompletePage
 from .highlight_page import HighlightPage
 from .misc import resize_app
 from .replacements_page import ReplacementsPage
-from .auto_update import download_newest_version  # type: ignore # noqa: F401
 
 
 class App(Tk):
