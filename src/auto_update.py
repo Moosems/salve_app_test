@@ -58,7 +58,5 @@ def download_newest_version() -> None:
     Popen(["open", "/Applications/SalveTest.app"])
     exit(1)
 
-print("Old version")
-
 if not is_newest_version() and is_frozen:
     download_newest_version()
