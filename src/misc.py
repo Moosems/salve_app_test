@@ -2,8 +2,8 @@ from pathlib import Path
 
 VERSION = "0.1.0"
 try:
-    folder = Path(__compiled__.containing_dir).resolve()  # type: ignore
-except:
+    folder = Path(__compiled__.containing_dir).resolve()  # type: ignore # noqa: F821
+except NameError:
     folder = Path(__file__).parent
 
 
