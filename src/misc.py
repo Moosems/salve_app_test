@@ -1,3 +1,12 @@
+from pathlib import Path
+
+VERSION = "0.1.0"
+try:
+    folder = Path(__compiled__.containing_dir).resolve()  # type: ignore
+except:
+    folder = Path(__file__).parent
+
+
 def resize_app(app, keep_size: bool = False) -> None:
     app.update_idletasks()
     minimum_width = app.winfo_reqwidth()

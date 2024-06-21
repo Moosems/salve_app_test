@@ -11,8 +11,6 @@ from .highlight_page import HighlightPage
 from .misc import resize_app
 from .replacements_page import ReplacementsPage
 
-VERSION = "0.1.0"
-
 
 class App(Tk):
     def __init__(self):
