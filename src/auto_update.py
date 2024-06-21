@@ -1,10 +1,14 @@
-import urllib.request
-from tempfile import TemporaryDirectory
+from shutil import move
+from subprocess import Popen
+from sys import exit
+from tempfile import NamedTemporaryFile, TemporaryDirectory
+from urllib.request import urlretrieve
+from zipfile import ZipFile
 
 from requests import Response, get
 from requests.exceptions import ReadTimeout
 
-from .misc import GITHUB_URL, VERSION
+from .misc import GITHUB_URL, VERSION, folder, is_frozen
 
 
 # NOTE: This should always be run in a subprocess!
@@ -38,16 +42,23 @@ def download_newest_version() -> None:
     except ReadTimeout:
         return
 
-    assets: str = response.json()["assets"]
+    assets: list[dict[str, str]] = response.json()["assets"]
 
     if not assets:
         return
 
-    file_path = TemporaryDirectory(prefix="SalveTest.app")
-    urllib.request.urlretrieve(assets[0], file_path.name)
-    # Swap files
+    zip_path = NamedTemporaryFile(prefix="SalveTest.app.zip")
+    app_dir = TemporaryDirectory(prefix="SalveTest.app")
+    urlretrieve(assets[0]["browser_download_url"], zip_path.name)
+    with ZipFile(zip_path.name) as zip_ref:
+        zip_ref.extractall(app_dir.name)
+    move(app_dir.name, "/Applications/SalveTest.app")
+    move(folder, app_dir.name)
+    app_dir.cleanup()
+    zip_path.close()
+    Popen(["open", "/Applications/SalveTest.app"])
+    exit(1)
 
-    file_path.cleanup()
 
-
-download_newest_version()
+if not is_newest_version() and is_frozen:
+    download_newest_version()
