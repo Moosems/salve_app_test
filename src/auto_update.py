@@ -58,7 +58,9 @@ def download_newest_version() -> None:
     app_dir.cleanup()
     zip_path.close()
     old_app_dir.cleanup()
-    Popen(["chmod", "+x", "/Applications/SalveTest.app/Contents/MacOS/SalveTest"]).wait()
+    Popen(
+        ["chmod", "+x", "/Applications/SalveTest.app/Contents/MacOS/SalveTest"]
+    ).wait()
     Popen(["open", "/Applications/SalveTest.app"])
     exit(1)
 
