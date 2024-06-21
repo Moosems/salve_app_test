@@ -1,3 +1,4 @@
+from os import rmdir
 from shutil import move
 from subprocess import Popen
 from sys import exit
@@ -61,6 +62,7 @@ def download_newest_version() -> None:
     Popen(
         ["chmod", "+x", "/Applications/SalveTest.app/Contents/MacOS/SalveTest"]
     ).wait()
+    rmdir("/Applications/SalveTest.app/SalveTest.app") # For some reason theres a double copy of the app
     Popen(["open", "/Applications/SalveTest.app"])
     exit(1)
 
