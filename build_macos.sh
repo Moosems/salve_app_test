@@ -7,7 +7,7 @@ python3 -m pip install -r requirements.txt --break-system-packages
 python3 -m pip install nuitka --break-system-packages
 
 # Compile python
-python3 -m nuitka main.py -o SalveTest --onefile --enable-plugin=tk-inter
+python3 -m nuitka main.py -o SalveTest --standalone --onefile --enable-plugin=tk-inter --include-package=pygments.lexers
 
 # Make an app bundle
 mkdir -p SalveTest.app/Contents/MacOS
