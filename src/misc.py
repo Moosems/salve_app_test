@@ -1,9 +1,8 @@
 from pathlib import Path
 
-from requests import Response, get
-from requests.exceptions import ReadTimeout
+GITHUB_URL = "https://api.github.com/repos/Moosems/salve_app_test/releases/latest"
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 try:
     folder = Path(__compiled__.containing_dir).resolve().parent.parent  # type: ignore # noqa: F821
 except NameError:
@@ -19,24 +18,3 @@ def resize_app(app, keep_size: bool = False) -> None:
     app.geometry(f"{minimum_width}x{minimum_height}+{x_coords}+{y_coords}")
 
     app.wm_minsize(minimum_width, minimum_height)
-
-
-# NOTE: This should always be run in a subprocess!
-def is_newest_version() -> bool:
-    try:
-        response: Response = get(
-            "https://api.github.com/repos/Moosems/salve_app_test/releases/latest",
-            headers={
-                "Accept": "application/vnd.github+json",
-                "X-GitHub-Api-Version": "2022-11-28",
-            },
-            timeout=3,
-        )
-        version: str = response.json()["tag_name"].lstrip("v")
-    except ReadTimeout:
-        return False
-
-    return True if version == VERSION else False
-
-
-def download_newest_version(): ...

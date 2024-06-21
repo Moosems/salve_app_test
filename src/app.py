@@ -10,6 +10,7 @@ from .autocomplete_page import AutocompletePage
 from .highlight_page import HighlightPage
 from .misc import resize_app
 from .replacements_page import ReplacementsPage
+from .auto_update import download_newest_version  # type: ignore # noqa: F401
 
 
 class App(Tk):
