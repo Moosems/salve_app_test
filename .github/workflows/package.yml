@@ -38,32 +38,13 @@ jobs:
         brew install ccache
         chmod +x ./build_macos.sh
         ./build_macos.sh
-
-    # - name: Log files
-    #   run: |
-    #     rm -rf SalveTest
-    #     mkdir SalveTest
-
-    # - name: Package app
-    #   run: |
-    #     mv ./SalveTest.app ./SalveTest/SalveTest.app
-    #     brew install create-dmg
-    #     test -f SalveTest.dmg && rm SalveTest.dmg
-    #     create-dmg \
-    #       --volname "SalveTest" \
-    #       --icon "SalveTest.app" 100 100 \
-    #       --app-drop-link 400 100 \
-    #       --window-size 500 300 \
-    #       "SalveTest.dmg" \
-    #       "SalveTest/"
+        zip SalveTest.zip SalveTest.app
 
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.TOKEN }}
-        # file: SalveTest.dmg
-        # asset_name: SalveTest.dmg
-        file: SalveTest.app
-        asset_name: SalveTest.app
+        file: SalveTest.zip
+        asset_name: SalveTest.zip
         tag: ${{ github.ref }}
         overwrite: true
