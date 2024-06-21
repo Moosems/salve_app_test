@@ -66,4 +66,4 @@ jobs:
         file: SalveTest.app
         asset_name: SalveTest.app
         tag: ${{ github.ref }}
-        # overwrite: true
+        overwrite: true
