@@ -1,14 +1,15 @@
-from sys import exit
-from urllib.request import urlretrieve
-from subprocess import Popen
 from shutil import move
+from subprocess import Popen
+from sys import exit
 from tempfile import NamedTemporaryFile, TemporaryDirectory
+from urllib.request import urlretrieve
 from zipfile import ZipFile
 
 from requests import Response, get
 from requests.exceptions import ReadTimeout
 
 from .misc import GITHUB_URL, VERSION, folder, is_frozen
+
 
 # NOTE: This should always be run in a subprocess!
 def is_newest_version() -> bool:
@@ -57,6 +58,7 @@ def download_newest_version() -> None:
     zip_path.close()
     Popen(["open", "/Applications/SalveTest.app"])
     exit(1)
+
 
 if not is_newest_version() and is_frozen:
     download_newest_version()
