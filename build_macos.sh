@@ -2,7 +2,7 @@
 
 echo "Building test app..."
 
-# Install deps using Homebrew
+# Install deps
 python3 -m pip install -r requirements.txt --break-system-packages
 python3 -m pip install nuitka --break-system-packages
 

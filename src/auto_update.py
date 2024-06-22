@@ -1,5 +1,4 @@
-from os import rmdir
-from shutil import move
+from shutil import move, rmtree
 from subprocess import Popen
 from sys import exit
 from tempfile import NamedTemporaryFile, TemporaryDirectory
@@ -9,7 +8,7 @@ from zipfile import ZipFile
 from requests import Response, get
 from requests.exceptions import ReadTimeout
 
-from .misc import GITHUB_URL, VERSION, folder, is_frozen
+from .misc import GITHUB_URL, VERSION, folder
 
 
 # NOTE: This should always be run in a subprocess!
@@ -55,18 +54,14 @@ def download_newest_version() -> None:
     with ZipFile(zip_path.name) as zip_ref:
         zip_ref.extractall(app_dir.name)
     move(folder, old_app_dir.name)
+    try:
+        rmtree("/Applications/SalveTest.app")
+    except OSError or Exception:
+        pass
     move(app_dir.name + "/SalveTest.app", "/Applications/SalveTest.app")
     app_dir.cleanup()
     zip_path.close()
     old_app_dir.cleanup()
-    Popen(
-        ["chmod", "+x", "/Applications/SalveTest.app/Contents/MacOS/SalveTest"]
-    ).wait()
-    rmdir("/Applications/SalveTest.app/SalveTest.app") # For some reason theres a double copy of the app
+    Popen(["chmod", "+x", "/Applications/SalveTest.app/Contents/MacOS/SalveTest"]).wait()
     Popen(["open", "/Applications/SalveTest.app"])
     exit(1)
-
-
-if not is_newest_version() and is_frozen:
-    print("Trying", VERSION)
-    download_newest_version()
